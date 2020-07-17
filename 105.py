@@ -15,8 +15,29 @@ and now you know about slicing from the end as well :)
 keep enjoying our bites!
 """
 
+instruction = """Loop through the lines, for each line:
+
+strip off any leading spaces,
+check if the first character is lowercase,
+if so, split the line into words and get the last word,
+strip off BOTH the trailing dot (.) and exclamation mark (!) from this last word,
+and finally add it to the results list.
+Return the results list."""
 
 def slice_and_dice(text: str = text) -> list:
     """Get a list of words from the passed in text.
        See the Bite description for step by step instructions"""
     results = []
+    for line in text.strip().splitlines():
+        line = line.lstrip()
+        print(line)
+        if line[0] not in ascii_lowercase:
+            continue
+
+        words = line.split()
+        last_word_stripped = words[-1].rstrip('!.')
+        results.append(last_word_stripped)
+    print(results)
+    return results
+
+slice_and_dice()
