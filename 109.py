@@ -22,14 +22,11 @@ INVALID_DAY = 'Not a valid day'
 def get_workout_motd(day):
     """First title case the passed in day argument
        (so monday or MONDAY both result in Monday).
-
        If day is not in WORKOUT_SCHEDULE, return INVALID_DAY
-
        If day is in WORKOUT_SCHEDULE retrieve the value (workout)
        and return the following:
        - weekday, return TRAIN with the workout value interpolated
        - weekend day (value 'Rest'), return CHILL_OUT
-
        Examples:
        - if day is Monday -> function returns 'Go train Chest+biceps'
        - if day is Thursday -> function returns 'Go train Legs'
@@ -39,4 +36,19 @@ def get_workout_motd(day):
        Trivia: /etc/motd is a file on Unix-like systems that contains
        a 'message of the day'
     """
-    pass
+
+# Option 1
+    try:
+        value = WORKOUT_SCHEDULE[day.capitalize()]
+        return CHILL_OUT if value == REST else "{}{}".format(TRAIN[:-2], value)
+    except:
+        print(INVALID_DAY)
+        return INVALID_DAY
+
+# Options 2
+    workout = WORKOUT_SCHEDULE.get(day.title())
+    if workout is None:
+        return INVALID_DAY
+    return CHILL_OUT if workout == REST else TRAIN.format(workout)
+
+get_workout_motd("Tuesday")
