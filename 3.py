@@ -63,20 +63,3 @@ def max_word_value(words):
         count_words[word] = word_score
     print(count_words)
     return max(count_words, key=count_words.get)
-
-
-def load_words():
-    """Load the words dictionary (DICTIONARY constant) into a list
-       and return it"""
-    with open(DICTIONARY) as f:
-        return [word.strip() for word in f.read().split()]
-
-
-def calc_word_value(word):
-    """Given a word calculate its value using the LETTER_SCORES dict"""
-    return sum(LETTER_SCORES.get(char.upper(), 0) for char in word)
-
-
-def max_word_value(words):
-    """Given a list of words calculate the word with the maximum value and return it"""
-    return max(words, key=calc_word_value)
